@@ -1,5 +1,5 @@
 import React from 'react';
-import { Lock, Siren, Car, Thermometer, Lightbulb } from 'lucide-react';
+import { Lock, Siren, Car, Thermometer, Lightbulb, Camera, Settings, Radio, Shield } from 'lucide-react';
 import { FadeInView, StaggerChildren, StaggerItem } from '@/components/ui/fade-in-view';
 
 const projects = [
@@ -8,6 +8,10 @@ const projects = [
     { Icon: Car, title: 'Parking Sensor', lines: '8 lines', tags: ['Sensors', 'LCD', 'Buzzer'], desc: 'Ultrasonic distance display with "Safe / Slow Down / STOP" status, buzzer proximity beeps, and live distance on LCD or OLED.' },
     { Icon: Thermometer, title: 'Weather Station', lines: '8 lines', tags: ['Sensors (DHT)', 'LCD', 'Cloud'], desc: 'DHT temperature and humidity monitoring with timed readings, LCD display, and automatic telemetry upload to your backend.' },
     { Icon: Lightbulb, title: 'Smart Switch', lines: '8 lines', tags: ['Relay', 'Sensors (PIR)'], desc: 'Motion-activated lighting with configurable auto-off timeout. Turns on when PIR detects movement, turns off after inactivity.' },
+    { Icon: Camera, title: 'Edge Vision', lines: '5 lines', tags: ['Camera', 'WiFi'], desc: 'Real-time MJPEG streaming with zero boilerplate. Automatic board detection and memory management for ESP32-CAM.' },
+    { Icon: Settings, title: 'Multi-Servo Ease', lines: '10 lines', tags: ['Servo', 'Easing'], desc: 'Control multiple servo motors with smooth easing animations and sweep cycles, all without blocking your sensors.' },
+    { Icon: Radio, title: 'LoRa Node', lines: '12 lines', tags: ['LoRa', 'Sensors'], desc: 'Long-range environmental monitoring for remote areas. Transmit telemetry over kilometers without WiFi or internet.' },
+    { Icon: Shield, title: 'RFID Auth', lines: '10 lines', tags: ['RFID', 'Auth', 'Relay'], desc: 'Employee access control using MFRC522 cards. Secure validation with unique IDs and automatic relay triggering.' },
 ];
 
 export const ProjectsSection = () => (

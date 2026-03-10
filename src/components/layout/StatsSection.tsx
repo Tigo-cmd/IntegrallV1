@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { FadeInView, StaggerChildren, StaggerItem } from '@/components/ui/fade-in-view';
 
 const stats = [
-    { value: 10, suffix: '', label: 'Hardware Modules', color: 'var(--il-lime)' },
-    { value: 5, suffix: '+', label: 'Ready Projects', color: 'var(--il-magenta)' },
+    { value: 17, suffix: '+', label: 'Hardware Modules', color: 'var(--il-lime)' },
+    { value: 15, suffix: '+', label: 'Ready Projects', color: 'var(--il-magenta)' },
     { value: 3, suffix: '', label: 'Platforms', color: 'var(--il-cyan)' },
     { value: 1, suffix: '', label: 'Unified Include', color: 'var(--il-lime)' },
     { value: 100, suffix: '%', label: 'Mobile Ready', color: 'var(--il-magenta)' },
