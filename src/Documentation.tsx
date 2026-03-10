@@ -72,6 +72,11 @@ export default function DocumentationPage() {
                 <aside className="hidden lg:block lg:col-span-3 sticky top-24 h-fit">
                     <nav className="space-y-8">
                         <div>
+                            <Link to="/" className="flex items-center gap-2 text-white/40 hover:text-white transition-colors mb-8 group no-underline">
+                                <ArrowLeft className="size-4 group-hover:-translate-x-1 transition-transform" />
+                                <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Back to Home</span>
+                            </Link>
+
                             <h5 className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#D4FF33] mb-4 px-2">Knowledge Base</h5>
                             <ul className="space-y-1">
                                 {['Getting Started', 'Dependencies', 'WiFi Infrastructure', 'Hardware Ecosystem'].map((item, idx) => (
@@ -122,7 +127,7 @@ export default function DocumentationPage() {
                             <ul className="space-y-1">
                                 {[
                                     { name: 'Project Presets', id: 'project-presets' },
-                                    { name: 'IoT Cloud & Backend', id: 'iot-cloud-%26-backend' },
+                                    { name: 'IoT Cloud & Backend', id: 'iot-cloud-and-backend' },
                                     { name: 'Debugging', id: 'debugging' },
                                     { name: 'Configuration', id: 'configuration' }
                                 ].map((item, idx) => (
@@ -148,6 +153,11 @@ export default function DocumentationPage() {
 
                 {/* Main Content */}
                 <main className="lg:col-span-9">
+                    <Link to="/" className="inline-flex lg:hidden items-center gap-2 text-white/40 hover:text-white transition-colors mb-12 group no-underline">
+                        <ArrowLeft className="size-4 group-hover:-translate-x-1 transition-transform" />
+                        <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Back to Home</span>
+                    </Link>
+
                     <FadeInView>
                         <div className="flex items-center gap-3 mb-8">
                             <Book className="size-5 text-[var(--il-lime)]" />
@@ -403,7 +413,7 @@ export default function DocumentationPage() {
                                 <div className="mt-12 p-8 rounded-3xl bg-gradient-to-r from-cyan-500/5 to-transparent border border-white/5">
                                     <h4 className="text-sm font-bold text-white uppercase tracking-widest mb-4">Complete Hardware Catalog</h4>
                                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-4 gap-x-8">
-                                        {['Sensors', 'Relays', 'Keypads', 'OLED (SSD1306)', 'Buzzer Alerts', 'RGB LED', 'ESP32-CAM', 'Blinker'].map(m => (
+                                        {['Sensors', 'Relays', 'Keypads', 'OLED', 'Buzzer', 'Audio (MP3)', 'RGB LED', 'ESP32-CAM', 'Blinker', 'Input UI', 'Storage', 'Time & GPS', 'Wireless', 'Power', 'Stepper'].map(m => (
                                             <div key={m} className="flex items-center gap-2 text-xs text-white/40">
                                                 <div className="size-1.5 rounded-full bg-cyan-500/50" />
                                                 {m}
@@ -690,6 +700,15 @@ export default function DocumentationPage() {
                                             </h3>
                                             <p className="mb-4">High-precision I2C reading. Updates temperature, humidity, and barometric pressure in one call.</p>
                                             <CodeBlock language="cpp" code={`float t, h, p;\nintegrall.readEnvironment(0x76, t, h, p); // I2C Addr, temp, hum, pres`} />
+                                        </div>
+
+                                        <div className="group">
+                                            <h3 className="text-white uppercase tracking-widest text-sm font-black mb-4 flex items-center gap-2">
+                                                <div className="size-2 rounded-full bg-[#D4FF33]" />
+                                                readGasLevel (MQ)
+                                            </h3>
+                                            <p className="mb-4">Reads MQ-series gas sensors (Smoke, CO, LPG). Returns a normalized parts-per-million (PPM) approximation or raw analog percentage.</p>
+                                            <CodeBlock language="cpp" code={`int gas = integrall.readAnalogPercent(A2); // MQ-2 on A2\nif (gas > 40) integrall.buzzer.alert();`} />
                                         </div>
 
                                         <div className="group">
@@ -1228,7 +1247,7 @@ export default function DocumentationPage() {
                             </section>
 
                             {/* IoT Cloud & Backend Section */}
-                            <section id="iot-cloud-&-backend" className="relative pt-16">
+                            <section id="iot-cloud-and-backend" className="relative pt-16">
                                 <div className="absolute left-0 top-0 w-12 h-px bg-magenta-500/50" />
                                 <h2 className="text-3xl font-black uppercase tracking-tighter mb-8 flex items-center gap-4">
                                     <span className="text-white/10 shrink-0">23</span>
@@ -1313,6 +1332,15 @@ export default function DocumentationPage() {
                                             <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_ENABLE_LCD</span> <span className="text-cyan-400">OFF</span></div>
                                             <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_ENABLE_OLED</span> <span className="text-cyan-400">OFF</span></div>
                                             <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_ENABLE_KEYPAD</span> <span className="text-cyan-400">OFF</span></div>
+                                            <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_ENABLE_INPUT</span> <span className="text-cyan-400">OFF</span></div>
+                                            <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_ENABLE_STORAGE</span> <span className="text-cyan-400">OFF</span></div>
+                                            <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_ENABLE_TIME</span> <span className="text-cyan-400">OFF</span></div>
+                                            <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_ENABLE_COMM</span> <span className="text-cyan-400">OFF</span></div>
+                                            <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_ENABLE_POWER</span> <span className="text-cyan-400">OFF</span></div>
+                                            <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_ENABLE_AUDIO</span> <span className="text-cyan-400">OFF</span></div>
+                                            <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_ENABLE_STEPPER</span> <span className="text-cyan-400">OFF</span></div>
+                                            <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_ENABLE_CAMERA</span> <span className="text-cyan-400">OFF</span></div>
+                                            <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_DEBUG_LEVEL</span> <span className="text-cyan-400">2</span></div>
                                         </div>
                                     </div>
 
