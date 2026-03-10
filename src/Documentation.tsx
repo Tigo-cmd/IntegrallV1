@@ -1251,35 +1251,51 @@ export default function DocumentationPage() {
                                 <div className="absolute left-0 top-0 w-12 h-px bg-magenta-500/50" />
                                 <h2 className="text-3xl font-black uppercase tracking-tighter mb-8 flex items-center gap-4">
                                     <span className="text-white/10 shrink-0">23</span>
-                                    IoT Cloud & Backend
+                                    IoT & Easy HTTP
                                 </h2>
                                 <div className="prose prose-invert prose-cyan max-w-none text-white/60 space-y-12">
                                     <p className="text-lg leading-relaxed">
-                                        Integrall bridges physical hardware to the digital world through three primary channels: <strong className="text-white">Blynk</strong> for mobile UI, <strong className="text-white">MQTT</strong> for local automation, and the <strong className="text-white">Integrall Backend</strong> for scalable data storage.
+                                        Integrall bridges physical hardware to the digital world through three primary channels: <strong className="text-white">Blynk</strong> for mobile UI, <strong className="text-white">MQTT</strong> for local automation, and the <strong className="text-white">Integrall HTTP Engine</strong> for scalable web requests.
                                     </p>
 
-                                    <div className="space-y-8">
+                                    <div className="space-y-16">
+                                        {/* Easy HTTP */}
+                                        <div className="group">
+                                            <h3 className="text-white uppercase tracking-widest text-sm font-black mb-4 flex items-center gap-2">
+                                                <div className="size-2 rounded-full bg-[#ff00e5]" />
+                                                1. Easy HTTP (Native API Calls)
+                                            </h3>
+                                            <p className="mb-4">
+                                                Say goodbye to <code className="text-white">HTTPClient</code> loops, header management, and memory leaks. The <code className="text-magenta-400">Easy HTTP</code> engine handles connection allocation natively and returns parsed strings immediately.
+                                            </p>
+
+                                            <div className="grid md:grid-cols-2 gap-8 not-prose mb-6">
+                                                <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
+                                                    <h4 className="text-white text-xs font-bold uppercase tracking-widest mb-4">httpGet(url)</h4>
+                                                    <p className="text-xs mb-4 text-white/40">Performs a GET request and returns the response body as a String.</p>
+                                                    <CodeBlock language="cpp" code={`String json = integrall.httpGet("http://api.scantool.com/status");`} />
+                                                </div>
+                                                <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
+                                                    <h4 className="text-white text-xs font-bold uppercase tracking-widest mb-4">httpPost(url, payload)</h4>
+                                                    <p className="text-xs mb-4 text-white/40">Sends JSON data to a server and returns the HTTP status code.</p>
+                                                    <CodeBlock language="cpp" code={`int code = integrall.httpPost("http://api.server.com/ack", "{\\"id\\": 1}");`} />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Integrall Custom Backend */}
                                         <div className="group">
                                             <h3 className="text-white uppercase tracking-widest text-sm font-black mb-4 flex items-center gap-2">
                                                 <div className="size-2 rounded-full bg-[#D4FF33]" />
-                                                1. Integrall Custom Backend
+                                                2. Auto-Telemetry Backend
                                             </h3>
-                                            <p className="text-sm">Initialize with a Backend URL to automatically register your device and send JSON telemetry.</p>
-                                            <CodeBlock language="cpp" code={`integrall.begin("SSID", "PASS", "http://your-server.com:8000");\n\n// Send custom data\nStaticJsonDocument<64> doc;\ndoc["status"] = "operating";\nintegrall.sendTelemetry(doc);`} />
+                                            <p className="text-sm">Initialize with your Backend URL to automatically register your device and send automated telemetry JSON objects.</p>
+                                            <CodeBlock language="cpp" code={`// The framework handles headers and background retries!\nintegrall.begin("SSID", "PASS", "http://your-server.com:8000");\n\nStaticJsonDocument<64> doc;\ndoc["status"] = "operating";\nintegrall.sendTelemetry(doc);`} />
                                         </div>
 
-                                        <div className="group">
-                                            <h3 className="text-white uppercase tracking-widest text-sm font-black mb-4 flex items-center gap-2">
-                                                <div className="size-2 rounded-full bg-cyan-400" />
-                                                2. Blynk Activation
-                                            </h3>
-                                            <p className="text-sm">Define template credentials to use Blynk virtual pins directly via <code className="text-white">cloudWrite()</code>.</p>
-                                            <CodeBlock language="cpp" code={`#define INTEGRALL_ENABLE_BLYNK\n#define BLYNK_TEMPLATE_ID "..."\n#include <Integrall.h>`} />
-                                        </div>
-
-                                        <div className="p-6 rounded-2xl bg-magenta-500/5 border border-magenta-500/10">
-                                            <h4 className="text-white font-bold text-xs uppercase mb-2">MQTT Support</h4>
-                                            <p className="text-[11px] leading-relaxed">For advanced users, Integrall supports custom MQTT brokers (Mosquitto/AWS IoT). Periodic heartbeats and command subscription are handled in the background by <code className="text-white">DeviceManager</code>.</p>
+                                        <div className="p-6 rounded-2xl bg-cyan-500/5 border border-cyan-500/10">
+                                            <h4 className="text-white font-bold text-xs uppercase mb-2">MQTT & Webhooks</h4>
+                                            <p className="text-[11px] leading-relaxed">For advanced webhooks, Integrall <code className="text-white">DeviceManager</code> exposes connection state securely, allowing you to use standard <code className="text-white">WebServer</code> classes natively without blocking.</p>
                                         </div>
                                     </div>
                                 </div>
