@@ -222,10 +222,11 @@ export default function DocumentationPage() {
                                         code={`#define INTEGRALL_ENABLE_RELAY\n#define INTEGRALL_ENABLE_LCD\n#include <Integrall.h>\n\nIntegrall::System integrall;`}
                                     />
 
-                                    <h4 className="text-white uppercase tracking-widest text-xs font-bold mt-12 mb-4">2. Enabling WiFi</h4>
+                                    <h4 className="text-white uppercase tracking-widest text-xs font-bold mt-12 mb-4">2. Professional Connectivity</h4>
+                                    <p className="text-sm">Choose between <strong className="text-cyan-400">Station Mode</strong> (connect to router) or <strong className="text-magenta-400">AP Mode</strong> (create hotspot) with a single line.</p>
                                     <CodeBlock
                                         language="cpp"
-                                        code={`#define INTEGRALL_ENABLE_WIFI\n#include <Integrall.h>`}
+                                        code={`// Best for Cloud Integration (Station Mode)\nintegrall.begin("MyWiFi", "Pass123", "http://my-backend.com");\n\n// Best for Local Control (AP Mode)\nintegrall.beginAP("Integrall Device");`}
                                     />
                                 </div>
                             </section>
@@ -264,6 +265,11 @@ export default function DocumentationPage() {
                                                     <td className="py-4 px-2 text-white font-bold italic">DallasTemperature</td>
                                                     <td className="py-4 px-2"><code className="text-cyan-500 text-[10px]">INTEGRALL_ENABLE_SENSORS</code></td>
                                                     <td className="py-4 px-2">For DS18B20 waterproof temp probes.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td className="py-4 px-2 text-white font-bold italic">OneWire</td>
+                                                    <td className="py-4 px-2"><code className="text-cyan-500 text-[10px]">INTEGRALL_ENABLE_SENSORS</code></td>
+                                                    <td className="py-4 px-2">Required for DS18B20 probes.</td>
                                                 </tr>
                                                 <tr>
                                                     <td className="py-4 px-2 text-white font-bold italic">Adafruit BME280</td>
@@ -316,9 +322,14 @@ export default function DocumentationPage() {
                                                     <td className="py-4 px-2">Matrix input for PIN and password locks.</td>
                                                 </tr>
                                                 <tr>
-                                                    <td className="py-4 px-2 text-white font-bold italic">Adafruit SSD1306 + GFX</td>
+                                                    <td className="py-4 px-2 text-white font-bold italic">Adafruit GFX Library</td>
                                                     <td className="py-4 px-2"><code className="text-magenta-500 text-[10px]">INTEGRALL_ENABLE_OLED</code></td>
-                                                    <td className="py-4 px-2">Professional graphics and progress bars.</td>
+                                                    <td className="py-4 px-2">Core graphics engine. Required by OLED and LCD modules.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td className="py-4 px-2 text-white font-bold italic">Adafruit Unified Sensor</td>
+                                                    <td className="py-4 px-2"><code className="text-yellow-500 text-[10px]">INTEGRALL_ENABLE_SENSORS</code></td>
+                                                    <td className="py-4 px-2">Foundation for BME280 and DHT libraries.</td>
                                                 </tr>
                                                 <tr>
                                                     <td className="py-4 px-2 text-white font-bold italic">DHT Sensor Library</td>
@@ -339,10 +350,21 @@ export default function DocumentationPage() {
                                             <li>Go to <strong className="text-white">Sketch &rarr; Include Library &rarr; Manage Libraries</strong>.</li>
                                             <li>Search for the library name and click <strong className="text-white">Install</strong>.</li>
                                         </ol>
+
+                                        <div className="mt-6 p-4 rounded-xl bg-white/5 border border-white/10 flex items-start gap-4">
+                                            <div className="p-2 rounded-lg bg-cyan-500/20 text-[#00f2ff]">
+                                                <Zap className="size-4" />
+                                            </div>
+                                            <div>
+                                                <h5 className="text-[10px] font-bold uppercase tracking-widest text-white mb-1">Pro Tip: "Install All"</h5>
+                                                <p className="text-[11px] text-white/40 leading-relaxed">
+                                                    When installing Adafruit libraries, the IDE will often ask to install dependencies. Always click <strong className="text-white prose-cyan font-bold">"Install All"</strong> to automatically grab the GFX Library and Unified Sensor core.
+                                                </p>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </section>
-
                             {/* Connectivity Section */}
                             <section id="wifi-infrastructure" className="relative pt-16">
                                 <div className="absolute left-0 top-0 w-12 h-px bg-[#D4FF33]/50" />
@@ -356,10 +378,11 @@ export default function DocumentationPage() {
                                     </p>
 
                                     <div className="space-y-4">
-                                        <h4 className="text-white font-bold text-sm">Basic WiFi Setup</h4>
+                                        <h4 className="text-white font-bold text-sm">One-Line Network Modes</h4>
+                                        <p className="text-sm">Integrall manages WiFi persistence and reconnection automatically. Use <code className="text-white">begin()</code> for client/station mode or <code className="text-white">beginAP()</code> to host your own signal.</p>
                                         <CodeBlock
                                             language="cpp"
-                                            code={`#define INTEGRALL_ENABLE_WIFI\n#include <Integrall.h>\n\nvoid setup() {\n  integrall.begin();\n  integrall.connectWiFi("SSID", "PASSWORD");\n}`}
+                                            code={`void setup() {\n  // Option A: Connect to Internet\n  integrall.begin("HomeWiFi", "Pass123");\n\n  // Option B: Create Hotspot\n  integrall.beginAP("MyDevicePortal", "12345678");\n}`}
                                         />
                                     </div>
 
@@ -1240,8 +1263,8 @@ export default function DocumentationPage() {
                                             <div className="size-8 rounded bg-blue-500/20 flex items-center justify-center text-blue-400 font-bold text-xs border border-blue-500/20">W</div>
                                             <h3 className="text-white uppercase tracking-widest text-sm font-black m-0">4. IoT Weather Station</h3>
                                         </div>
-                                        <p className="text-sm">Automatic DHT reading, LCD visualization, and periodic telemetry syncing to the Integrall Cloud.</p>
-                                        <CodeBlock language="cpp" code={`// Setup: DHT Pin, DHT Type, Interval (Seconds)\nintegrall.weatherSetup(4, 22, 60);\n\n// Loop:\nintegrall.weatherUpdate();`} />
+                                        <p className="text-sm">Real-time environmental monitoring with professional cloud syncing. Automatically handles sensor jitter and network recovery.</p>
+                                        <CodeBlock language="cpp" code={`void setup() {\n  integrall.begin("WiFi_Name", "Pass123", "http://cloud.integrall.io");\n}\n\nvoid loop() {\n  integrall.handle();\n  \n  if (integrall.isOnline() && every5Seconds) {\n    integrall.sendTelemetry("temp", readTemp());\n  }\n}`} />
                                     </div>
                                 </div>
                             </section>
@@ -1287,10 +1310,19 @@ export default function DocumentationPage() {
                                         <div className="group">
                                             <h3 className="text-white uppercase tracking-widest text-sm font-black mb-4 flex items-center gap-2">
                                                 <div className="size-2 rounded-full bg-[#D4FF33]" />
-                                                2. Auto-Telemetry Backend
+                                                2. Simplified Telemetry API
                                             </h3>
-                                            <p className="text-sm">Initialize with your Backend URL to automatically register your device and send automated telemetry JSON objects.</p>
-                                            <CodeBlock language="cpp" code={`// The framework handles headers and background retries!\nintegrall.begin("SSID", "PASS", "http://your-server.com:8000");\n\nStaticJsonDocument<64> doc;\ndoc["status"] = "operating";\nintegrall.sendTelemetry(doc);`} />
+                                            <p className="text-sm">No more JSON manual construction. Send data to your backend in a single line. The framework handles device IDs, timestamps, and queuing behind the scenes.</p>
+                                            <div className="grid md:grid-cols-2 gap-4 my-6">
+                                                <div className="p-4 bg-white/[0.03] border border-white/5 rounded-xl">
+                                                    <div className="text-[10px] font-bold text-white/40 uppercase mb-2">Single Value</div>
+                                                    <CodeBlock language="cpp" code={`integrall.sendTelemetry("temp", 24.5);`} />
+                                                </div>
+                                                <div className="p-4 bg-white/[0.03] border border-white/5 rounded-xl">
+                                                    <div className="text-[10px] font-bold text-white/40 uppercase mb-2">Data Bundle (JSON)</div>
+                                                    <CodeBlock language="cpp" code={`StaticJsonDocument<128> doc;\ndoc["hum"] = 60;\ndoc["light"] = 80;\nintegrall.sendTelemetry(doc);`} />
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div className="p-6 rounded-2xl bg-cyan-500/5 border border-cyan-500/10">
@@ -1379,7 +1411,7 @@ export default function DocumentationPage() {
             </button>
 
             <footer className="mt-40 py-20 border-t border-white/5">
-                <div className="mx-auto max-max-w-7xl px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+                <div className="mx-auto max-w-7xl px-6 flex flex-col md:flex-row justify-between items-center gap-8">
                     <div className="flex items-center gap-3">
                         <div className="size-10 bg-white text-black font-black flex items-center justify-center text-xs">V1</div>
                         <div className="text-[10px] font-bold uppercase tracking-widest text-white/30">
