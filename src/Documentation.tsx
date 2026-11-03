@@ -719,37 +719,55 @@ export default function DocumentationPage() {
                                         <div className="group">
                                             <h3 className="text-white uppercase tracking-widest text-sm font-black mb-4 flex items-center gap-2">
                                                 <div className="size-2 rounded-full bg-[#D4FF33]" />
-                                                readTemperature / readHumidity (DHT)
+                                                Temperature & Climate (DHT, DS18B20, BME280, BMP280, SHT3x, NTC, LM35, TMP36)
                                             </h3>
-                                            <p className="mb-4">One-line interaction with DHT11/22 sensors. Requires the <code className="text-white">Adafruit DHT</code> library.</p>
-                                            <CodeBlock language="cpp" code={`float temp = integrall.readTemperature(4, DHT11); // Pin 4, DHT11 type`} />
+                                            <p className="mb-4">Unified one-liners for every temperature & climate sensor—including <strong className="text-white">driverless Steinhart-Hart NTC Thermistor</strong>, <strong className="text-white">LM35/TMP36</strong>, and <strong className="text-white">native I2C SHT30/SHT31/SHT35</strong> (no external library needed for SHT3x or NTC).</p>
+                                            <CodeBlock language="cpp" code={`float dhtT = integrall.readTemperature(4, DHT22);  // DHT11 / DHT22\nfloat dhtH = integrall.readHumidity(4, DHT22);\nfloat probeT = integrall.readProbeTemp(15);       // DS18B20 Waterproof\n\nfloat bmeT, bmeH, bmeP;\nintegrall.readEnvironment(0x76, bmeT, bmeH, bmeP); // BME280 (Temp, Hum, hPa)\nfloat pres = integrall.readPressure(0x76);         // BMP280 / BME280 hPa\n\nfloat shtT, shtH;\nintegrall.readSHT3x(0x44, shtT, shtH);            // Native I2C SHT30/31/35\n\nfloat ntcT   = integrall.readThermistorC(A0, 3950.0, 10000.0, 10000.0);\nfloat lm35T  = integrall.readLM35C(A1);\nfloat tmp36T = integrall.readTMP36C(A2);`} />
                                         </div>
 
                                         <div className="group">
                                             <h3 className="text-white uppercase tracking-widest text-sm font-black mb-4 flex items-center gap-2">
                                                 <div className="size-2 rounded-full bg-[#D4FF33]" />
-                                                readProbeTemp (DS18B20)
+                                                Light, Lux, UV Index & RGB Color (LDR, BH1750, GUVA-S12SD, TCS3200)
                                             </h3>
-                                            <p className="mb-4">Standardized reading for Dallas OneWire waterproof temperature probes. Ideal for liquids or harsh environments.</p>
-                                            <CodeBlock language="cpp" code={`float waterTemp = integrall.readProbeTemp(15); // GPIO 15`} />
+                                            <p className="mb-4">Read ambient light percentage, calibrated digital Lux via <strong className="text-white">native I2C BH1750</strong>, UV Index (0–15), and RGB color channels from TCS3200/TCS230 photodiode arrays.</p>
+                                            <CodeBlock language="cpp" code={`int lightPct = integrall.readLightPercent(A0, true); // LDR (0-100%)\nfloat lux    = integrall.readLux(0x23);              // BH1750 Digital Lux (Native I2C)\nfloat uvIdx  = integrall.readUVIndex(A1);            // GUVA-S12SD / ML8511 UV (0-15)\n\nuint8_t r, g, b;\nintegrall.readColorRGB(12, 13, 14, r, g, b);         // TCS3200 Color (S2, S3, OUT)`} />
                                         </div>
 
                                         <div className="group">
                                             <h3 className="text-white uppercase tracking-widest text-sm font-black mb-4 flex items-center gap-2">
                                                 <div className="size-2 rounded-full bg-[#D4FF33]" />
-                                                readEnvironment (BME280)
+                                                Ultrasonic, Sharp IR & Laser ToF Distance (HC-SR04, GP2Y0A21, VL53L0X)
                                             </h3>
-                                            <p className="mb-4">High-precision I2C reading. Updates temperature, humidity, and barometric pressure in one call.</p>
-                                            <CodeBlock language="cpp" code={`float t, h, p;\nintegrall.readEnvironment(0x76, t, h, p); // I2C Addr, temp, hum, pres`} />
+                                            <p className="mb-4">Multi-sample noise-filtered ultrasonic distance (cm), Sharp analog IR distance (10–80 cm), and millimeter-accurate VL53L0X Laser Time-of-Flight (ToF).</p>
+                                            <CodeBlock language="cpp" code={`float sonicCM = integrall.readDistanceCM(12, 11, 3);  // HC-SR04 (3-sample avg)\nfloat irCM    = integrall.readIRDistanceCM(A0);       // Sharp GP2Y0A21 IR (10-80cm)\nint   laserMM = integrall.readLaserDistanceMM();      // VL53L0X Laser ToF (mm)`} />
                                         </div>
 
                                         <div className="group">
                                             <h3 className="text-white uppercase tracking-widest text-sm font-black mb-4 flex items-center gap-2">
                                                 <div className="size-2 rounded-full bg-[#D4FF33]" />
-                                                readGasLevel / Analog Percent (MQ)
+                                                Air Quality, Gas PPM, PM2.5 Dust & CO2 (MQ-2/4/7/135, GP2Y1010, MH-Z19B)
                                             </h3>
-                                            <p className="mb-4">Reads MQ-series gas sensors (Smoke, CO, LPG) with automatic 12-bit/10-bit ADC scaling and bounds clamping (0-100%).</p>
-                                            <CodeBlock language="cpp" code={`int gas = integrall.readAnalogPercent(A2); // MQ-2 on A2\nif (gas > 40) integrall.buzzerAlert();`} />
+                                            <p className="mb-4">Calibrated <code className="text-white">Rs/R0</code> exponential PPM curves for MQ gas sensors, microsecond-timed optical dust/PM2.5 density (<code className="text-cyan-400">µg/m³</code>), and NDIR CO2 PWM decoding (<code className="text-cyan-400">400–5000 ppm</code>).</p>
+                                            <CodeBlock language="cpp" code={`int   gasPct  = integrall.readAnalogPercent(A2);       // Raw 0-100% MQ level\nfloat gasPPM  = integrall.readGasPPM(A2, 10.0, 10.0);  // Calibrated MQ-135 PPM\nfloat pm25    = integrall.readDustDensity(12, A0);     // Sharp GP2Y1010 (µg/m³)\nint   co2PPM  = integrall.readCO2PWM(15, 5000);        // MH-Z19B CO2 (ppm)`} />
+                                        </div>
+
+                                        <div className="group">
+                                            <h3 className="text-white uppercase tracking-widest text-sm font-black mb-4 flex items-center gap-2">
+                                                <div className="size-2 rounded-full bg-[#D4FF33]" />
+                                                Soil, Agriculture, Water Quality & Liquid Flow (Soil, Rain, TDS, pH, Turbidity, YF-S201)
+                                            </h3>
+                                            <p className="mb-4">Complete smart-farming and hydroponics suite: calibrated soil moisture, rain detection, temperature-compensated TDS (ppm), pH probe (0–14), water turbidity (NTU), and Hall-effect turbine flow rate (<code className="text-cyan-400">L/min</code>).</p>
+                                            <CodeBlock language="cpp" code={`int   soilPct = integrall.readSoilMoisture(A0, 3200, 1400); // Pin, dryRaw, wetRaw\nbool  raining = integrall.isRaining(A1, 30);                // Rain > 30%\nfloat tdsPPM  = integrall.readTDS(A2, 25.0);                // Temp-compensated TDS\nfloat phVal   = integrall.readPH(A3);                       // 0.0 - 14.0 pH\nfloat ntu     = integrall.readTurbidityNTU(A4);             // Water cloudiness (NTU)\nfloat flowLPM = integrall.readWaterFlowLPM(18, 7.5);        // YF-S201 L/min`} />
+                                        </div>
+
+                                        <div className="group">
+                                            <h3 className="text-white uppercase tracking-widest text-sm font-black mb-4 flex items-center gap-2">
+                                                <div className="size-2 rounded-full bg-[#D4FF33]" />
+                                                Load Cell Weight (HX711), Current (ACS712 AC/DC), Voltage & Heart Pulse
+                                            </h3>
+                                            <p className="mb-4">Includes a <strong className="text-white">built-in 24-bit HX711 driver</strong> for load cell scales, DC and 50/60Hz RMS AC current sensing for ACS712 (5A/20A/30A), DC voltage dividers, and analog PPG heart-rate pulse sensors.</p>
+                                            <CodeBlock language="cpp" code={`long  tare   = integrall.readWeightRaw(16, 17);                // HX711 DOUT, SCK\nfloat grams  = integrall.readWeightGrams(16, 17, tare, 420.0); // Calibrated grams\nfloat ampsDC = integrall.readCurrentDC(A0, 185.0);             // ACS712-5A DC Amps\nfloat ampsAC = integrall.readCurrentAC(A0, 100.0);             // ACS712-20A AC RMS Amps\nfloat volts  = integrall.readVoltageDivider(A1, 5.0);          // 0-25V Divider\nint   pulse  = integrall.readHeartPulsePercent(A2);            // PPG Heart Sensor`} />
                                         </div>
 
                                         <div className="group">
@@ -758,25 +776,25 @@ export default function DocumentationPage() {
                                                 Scientific Psychrometrics (Dew Point, Heat Index, Altitude)
                                             </h3>
                                             <p className="mb-4">Built-in Magnus-Tetens dew point, NOAA Rothfusz heat index, and barometric altitude equations.</p>
-                                            <CodeBlock language="cpp" code={`float dp = integrall.calculateDewPoint(temp, hum);\nfloat hi = integrall.calculateHeatIndex(temp, hum);\nfloat alt = integrall.calculateAltitude(pressure_hPa);`} />
+                                            <CodeBlock language="cpp" code={`float dp  = integrall.calculateDewPoint(temp, hum);\nfloat hi  = integrall.calculateHeatIndex(temp, hum);\nfloat alt = integrall.calculateAltitude(pressure_hPa);`} />
                                         </div>
 
                                         <div className="group">
                                             <h3 className="text-white uppercase tracking-widest text-sm font-black mb-4 flex items-center gap-2">
                                                 <div className="size-2 rounded-full bg-[#D4FF33]" />
-                                                6-Axis IMU (MPU6050) — Impact & Posture
+                                                6-Axis IMU (MPU6050) — Impact, Pitch, Roll & Posture
                                             </h3>
-                                            <p className="mb-4">Enable <code className="text-white">INTEGRALL_ENABLE_IMU</code> for real-time g-force impact measurement, horizontal orientation checks, and human posture classification (<code className="text-cyan-400">"Standing/Sitting"</code>, <code className="text-cyan-400">"Lying Down"</code>, <code className="text-cyan-400">"Inverted"</code>, <code className="text-cyan-400">"Tilted"</code>).</p>
-                                            <CodeBlock language="cpp" code={`integrall.enableIMU(21, 22); // SDA, SCL\nfloat gForce = integrall.getImpactForce();\nString posture = integrall.getPosture();\nif (gForce > 2.8 && integrall.isHorizontal()) {\n  integrall.println("Fall detected!");\n}`} />
+                                            <p className="mb-4">Enable <code className="text-white">INTEGRALL_ENABLE_IMU</code> for real-time g-force impact measurement, Pitch/Roll angles, horizontal orientation checks, and human posture classification (<code className="text-cyan-400">"Standing"</code>, <code className="text-cyan-400">"Sitting"</code>, <code className="text-cyan-400">"Fallen"</code>).</p>
+                                            <CodeBlock language="cpp" code={`integrall.enableIMU(21, 22); // SDA, SCL\nfloat gForce = integrall.getImpactForce();\nfloat pitch  = integrall.getPitch();\nfloat roll   = integrall.getRoll();\nString post  = integrall.getPosture();\nif (gForce > 25.0 && integrall.isHorizontal()) {\n  integrall.println("Fall detected!");\n}`} />
                                         </div>
 
                                         <div className="group">
                                             <h3 className="text-white uppercase tracking-widest text-sm font-black mb-4 flex items-center gap-2">
                                                 <div className="size-2 rounded-full bg-[#D4FF33]" />
-                                                motionDetected (PIR)
+                                                Security & Digital Triggers (PIR, Flame, Tilt, Reed Door, Vibration, Sound, Hall, Touch)
                                             </h3>
-                                            <p className="mb-4">Alias for <code className="text-white">isTriggered</code>. Semantic sugar for motion detection projects.</p>
-                                            <CodeBlock language="cpp" code={`if (integrall.motionDetected(5)) {\n  integrall.println("Trespasser detected!");\n}`} />
+                                            <p className="mb-4">Semantic one-liners for every digital security and trigger module.</p>
+                                            <CodeBlock language="cpp" code={`if (integrall.motionDetected(5))     integrall.println("Motion!");\nif (integrall.flameDetected(6))      integrall.buzzerAlert();\nif (integrall.doorOpen(7))           integrall.println("Door opened!");\nif (integrall.vibrationDetected(8))  integrall.println("Shock / Knock!");\nif (integrall.soundDetected(9))      integrall.println("Clap / Noise!");\nif (integrall.tiltDetected(10))      integrall.println("Tilted!");\nif (integrall.magneticDetected(14))  integrall.println("Magnet near!");\nif (integrall.touchDetected(15))     integrall.println("Touched!");`} />
                                         </div>
                                     </div>
 
@@ -1289,8 +1307,18 @@ export default function DocumentationPage() {
                                             <div className="size-8 rounded bg-blue-500/20 flex items-center justify-center text-blue-400 font-bold text-xs border border-blue-500/20">W</div>
                                             <h3 className="text-white uppercase tracking-widest text-sm font-black m-0">4. IoT Weather Station</h3>
                                         </div>
-                                        <p className="text-sm">Real-time environmental monitoring with professional cloud syncing. Automatically handles sensor jitter and network recovery.</p>
-                                        <CodeBlock language="cpp" code={`void setup() {\n  integrall.begin("WiFi_Name", "Pass123", "http://cloud.integrall.io");\n}\n\nvoid loop() {\n  integrall.handle();\n  \n  if (integrall.isOnline() && every5Seconds) {\n    integrall.sendTelemetry("temp", readTemp());\n  }\n}`} />
+                                        <p className="text-sm">Real-time environmental monitoring with automatic LCD display and cloud telemetry syncing.</p>
+                                        <CodeBlock language="cpp" code={`// Setup: DHT Pin, DHT Type (11 or 22), Interval (seconds)\nintegrall.weatherSetup(4, 22, 10);\n\n// Loop:\nintegrall.weatherUpdate();`} />
+                                    </div>
+
+                                    {/* 5. Smart Switch */}
+                                    <div className="space-y-6">
+                                        <div className="flex items-center gap-3">
+                                            <div className="size-8 rounded bg-emerald-500/20 flex items-center justify-center text-emerald-400 font-bold text-xs border border-emerald-500/20">S</div>
+                                            <h3 className="text-white uppercase tracking-widest text-sm font-black m-0">5. Motion Smart Switch</h3>
+                                        </div>
+                                        <p className="text-sm">Motion-activated lighting or appliance control that automatically turns off after a configurable inactivity timeout.</p>
+                                        <CodeBlock language="cpp" code={`// Setup: Relay Index, PIR Pin, Auto-Off Timeout (seconds)\nintegrall.smartSwitchSetup(lightRelay, 15, 30);\n\n// Loop:\nintegrall.smartSwitchUpdate();`} />
                                     </div>
                                 </div>
                             </section>
