@@ -170,7 +170,7 @@ export default function DocumentationPage() {
 
                         {/* Quick Actions */}
                         <div className="grid sm:grid-cols-2 gap-4 mb-12">
-                            <a href="https://github.com/Tigo-cmd/INTEGRALL" target="_blank" rel="noopener noreferrer" className="group relative p-6 bg-white/[0.02] border border-white/5 rounded-2xl hover:bg-white/[0.04] transition-all overflow-hidden">
+                            <a href="/Integrall_v1.1.0.zip" download="Integrall_v1.1.0.zip" className="group relative p-6 bg-white/[0.02] border border-white/5 rounded-2xl hover:bg-white/[0.04] transition-all overflow-hidden">
                                 <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                                     <Download className="size-16 rotate-[-10deg]" />
                                 </div>
@@ -178,11 +178,11 @@ export default function DocumentationPage() {
                                     <div className="p-2 rounded-lg bg-[var(--il-lime)]/10 text-[var(--il-lime)]">
                                         <Download className="size-5" />
                                     </div>
-                                    <h4 className="font-bold uppercase tracking-tight">Main Library</h4>
+                                    <h4 className="font-bold uppercase tracking-tight">Main Library (.ZIP)</h4>
                                 </div>
-                                <p className="text-sm text-white/40">Download the latest universal release for Arduino IDE & PlatformIO.</p>
-                                <div className="mt-4 flex items-center gap-2 text-[10px] font-bold text-[var(--il-lime)] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
-                                    Download v1.1.0 <ChevronRight className="size-3" />
+                                <p className="text-sm text-white/40">Direct download of <code className="text-white/70">Integrall_v1.1.0.zip</code> — ready for Arduino IDE (<strong className="text-white/70">Add .ZIP Library</strong>) & PlatformIO.</p>
+                                <div className="mt-4 flex items-center gap-2 text-[10px] font-bold text-[var(--il-lime)] uppercase tracking-widest opacity-80 group-hover:opacity-100 transition-opacity">
+                                    Download Integrall_v1.1.0.zip <ChevronRight className="size-3" />
                                 </div>
                             </a>
                             <a href="https://github.com/Tigo-cmd/INTEGRALL/tree/main/backend" target="_blank" rel="noopener noreferrer" className="group relative p-6 bg-white/[0.02] border border-white/5 rounded-2xl hover:bg-white/[0.04] transition-all">

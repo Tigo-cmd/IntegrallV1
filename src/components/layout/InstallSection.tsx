@@ -24,7 +24,17 @@ export const InstallSection = () => {
                 <FadeInView className="il-text-center">
                     <span className="il-section-label">Get Started</span>
                     <h2 className="il-section-title">Up and running in 2 minutes</h2>
-                    <p className="il-section-desc">Install the library, include the header, and start building.</p>
+                    <p className="il-section-desc">Download the ready-to-import Arduino library ZIP directly, or install via PlatformIO.</p>
+                    <div className="mt-6 mb-2 flex justify-center">
+                        <a
+                            href="/Integrall_v1.1.0.zip"
+                            download="Integrall_v1.1.0.zip"
+                            className="il-btn il-btn-primary"
+                            style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}
+                        >
+                            ⬇ Download Integrall_v1.1.0.zip (Direct Library ZIP)
+                        </a>
+                    </div>
                 </FadeInView>
 
                 <FadeInView delay={0.2}>
@@ -70,9 +80,9 @@ lib_deps =
                                 <div className="il-terminal-dot green" />
                             </div>
                             <button className="il-copy-btn" onClick={copyCode}>Copy</button>
-                            <pre>{`// 1. Open Arduino IDE
-// 2. Sketch → Include Library → Add .ZIP Library...
-// 3. Select the Integrall_v1_1_0.zip file
+                            <pre>{`// 1. Click "Download Integrall_v1.1.0.zip" above
+// 2. Open Arduino IDE → Sketch → Include Library → Add .ZIP Library...
+// 3. Select the downloaded Integrall_v1.1.0.zip file
 // 4. Install "ArduinoJson" from Library Manager
 // 5. Done! Now use it:
 
