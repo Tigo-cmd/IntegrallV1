@@ -106,16 +106,16 @@ void loop()  { integrall.handle(); }`}</pre>
                             </div>
                             <button className="il-copy-btn" onClick={copyCode}>Copy</button>
                             <pre>{`# Clone the repository
-git clone https://github.com/emmanueltigo/integrall.git
+git clone https://github.com/Tigo-cmd/INTEGRALL.git
 
 # Copy the library into your Arduino libraries folder
-cp -r integrall/firmware/Integrall ~/Arduino/libraries/
+cp -r INTEGRALL/firmware/Integrall ~/Arduino/libraries/
 
 # Or for PlatformIO, copy into your project
-cp -r integrall/firmware/Integrall your-project/lib/`}</pre>
+cp -r INTEGRALL/firmware/Integrall your-project/lib/`}</pre>
                         </div>
                         <p className="il-install-note">
-                            See <a href="https://github.com/emmanueltigo/integrall/blob/main/DEPENDENCIES.md">DEPENDENCIES.md</a> for the full list of optional libraries per module.
+                            See <a href="https://github.com/Tigo-cmd/INTEGRALL/blob/main/DEPENDENCIES.md" target="_blank" rel="noopener noreferrer">DEPENDENCIES.md</a> for the full list of optional libraries per module.
                         </p>
                     </div>
                 </FadeInView>

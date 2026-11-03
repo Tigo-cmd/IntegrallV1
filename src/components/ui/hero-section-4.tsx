@@ -155,7 +155,7 @@ export function HeroSection() {
                                     letterSpacing: '.05em',
                                     textTransform: 'uppercase' as const,
                                 }}>
-                                    <a href="https://github.com/emmanueltigo/integrall" target="_blank" rel="noopener noreferrer">
+                                    <a href="https://github.com/Tigo-cmd/INTEGRALL" target="_blank" rel="noopener noreferrer">
                                         <Github className="size-4" />
                                         <span className="text-nowrap">View on GitHub</span>
                                     </a>
