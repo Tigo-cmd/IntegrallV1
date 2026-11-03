@@ -102,7 +102,7 @@ export function HeroSection() {
                                 }}>
                                 <span className="inline-block h-2 w-2 rounded-full il-pulse" style={{ background: '#00f2ff', boxShadow: '0 0 8px rgba(0, 242, 255, .6)' }} />
                                 <span style={{ fontFamily: "'Space Grotesk', monospace", fontSize: '.78rem', fontWeight: 600, letterSpacing: '.1em', textTransform: 'uppercase' as const, color: 'rgba(255,255,255,.6)' }}>
-                                    System Active — v1.0
+                                    System Active — v1.1.0
                                 </span>
                             </div>
 

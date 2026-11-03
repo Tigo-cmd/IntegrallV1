@@ -62,7 +62,7 @@ export const Footer = () => (
             <div className="il-footer-bottom">
                 <span>Built by <strong>Emmanuel TIGO</strong> &middot; Open for <strong>Contributions & Collaborations</strong></span>
                 <div className="il-footer-badges">
-                    <span className="il-footer-badge">v1.0.0</span>
+                    <span className="il-footer-badge">v1.1.0</span>
                     <span className="il-footer-badge">ESP32</span>
                     <span className="il-footer-badge">FastAPI</span>
                 </div>

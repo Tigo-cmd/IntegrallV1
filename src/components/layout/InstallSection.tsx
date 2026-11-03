@@ -56,7 +56,7 @@ platform = espressif32
 board = esp32dev
 framework = arduino
 lib_deps =
-    bblanchon/ArduinoJson @ ^6.21.3
+    bblanchon/ArduinoJson @ ^7.0.0
     ; Copy the Integrall folder into your project's lib/ directory`}</pre>
                         </div>
                         <p className="il-install-note">Place the <code>Integrall/</code> folder inside your project's <code>lib/</code> directory, then build.</p>
@@ -72,7 +72,7 @@ lib_deps =
                             <button className="il-copy-btn" onClick={copyCode}>Copy</button>
                             <pre>{`// 1. Open Arduino IDE
 // 2. Sketch → Include Library → Add .ZIP Library...
-// 3. Select the Integrall_v1_0.zip file
+// 3. Select the Integrall_v1_1_0.zip file
 // 4. Install "ArduinoJson" from Library Manager
 // 5. Done! Now use it:
 

@@ -96,7 +96,7 @@ export default function DocumentationPage() {
                                 {[
                                     { name: 'LCD', id: 'module-lcd' },
                                     { name: 'Servo', id: 'module-servo' },
-                                    { name: 'Sensors', id: 'module-sensors' },
+                                    { name: 'Sensors & IMU', id: 'module-sensors' },
                                     { name: 'Relay', id: 'module-relay' },
                                     { name: 'Keypad', id: 'module-keypad' },
                                     { name: 'OLED', id: 'module-oled' },
@@ -108,7 +108,7 @@ export default function DocumentationPage() {
                                     { name: 'Input UI', id: 'module-input' },
                                     { name: 'Storage', id: 'module-storage' },
                                     { name: 'Time & GPS', id: 'module-time' },
-                                    { name: 'Wireless', id: 'module-comm' },
+                                    { name: 'Wireless & Cellular', id: 'module-comm' },
                                     { name: 'Power', id: 'module-power' },
                                     { name: 'Stepper', id: 'module-stepper' }
                                 ].map((item, idx) => (
@@ -161,16 +161,16 @@ export default function DocumentationPage() {
                     <FadeInView>
                         <div className="flex items-center gap-3 mb-8">
                             <Book className="size-5 text-[var(--il-lime)]" />
-                            <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-white/30">Release v1.0.4 Stable</span>
+                            <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-white/30">Release v1.1.0 Stable</span>
                         </div>
                         <AnimatedHeading text="Documentation" className="text-5xl lg:text-7xl mb-8" />
                         <p className="text-lg text-white/50 max-w-2xl leading-relaxed mb-12">
-                            Welcome to the Integrall user guide. Build fast, safe, and powerful IoT projects with professional-grade abstraction.
+                            Welcome to the Integrall user guide. Build fast, safe, and powerful IoT projects with professional-grade abstraction across ESP32, ESP8266, and Arduino AVR.
                         </p>
 
                         {/* Quick Actions */}
-                        <div className="grid sm:grid-cols-2 gap-4 mb-20">
-                            <a href="#" className="group relative p-6 bg-white/[0.02] border border-white/5 rounded-2xl hover:bg-white/[0.04] transition-all overflow-hidden">
+                        <div className="grid sm:grid-cols-2 gap-4 mb-12">
+                            <a href="https://github.com/Tigo-cmd/INTEGRALL" target="_blank" rel="noopener noreferrer" className="group relative p-6 bg-white/[0.02] border border-white/5 rounded-2xl hover:bg-white/[0.04] transition-all overflow-hidden">
                                 <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                                     <Download className="size-16 rotate-[-10deg]" />
                                 </div>
@@ -180,12 +180,12 @@ export default function DocumentationPage() {
                                     </div>
                                     <h4 className="font-bold uppercase tracking-tight">Main Library</h4>
                                 </div>
-                                <p className="text-sm text-white/40">Download the latest universal zip for Arduino IDE & PlatformIO.</p>
+                                <p className="text-sm text-white/40">Download the latest universal release for Arduino IDE & PlatformIO.</p>
                                 <div className="mt-4 flex items-center gap-2 text-[10px] font-bold text-[var(--il-lime)] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
-                                    Download v1.0.4 <ChevronRight className="size-3" />
+                                    Download v1.1.0 <ChevronRight className="size-3" />
                                 </div>
                             </a>
-                            <a href="#" className="group relative p-6 bg-white/[0.02] border border-white/5 rounded-2xl hover:bg-white/[0.04] transition-all">
+                            <a href="https://github.com/Tigo-cmd/INTEGRALL/tree/main/backend" target="_blank" rel="noopener noreferrer" className="group relative p-6 bg-white/[0.02] border border-white/5 rounded-2xl hover:bg-white/[0.04] transition-all">
                                 <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                                     <Box className="size-16 rotate-[10deg]" />
                                 </div>
@@ -193,13 +193,26 @@ export default function DocumentationPage() {
                                     <div className="p-2 rounded-lg bg-magenta-500/10 text-[#ff00e5]">
                                         <Box className="size-5" />
                                     </div>
-                                    <h4 className="font-bold uppercase tracking-tight">Backend v0.8</h4>
+                                    <h4 className="font-bold uppercase tracking-tight">Cloud Backend</h4>
                                 </div>
-                                <p className="text-sm text-white/40">FastAPI project for device management and telemetry logging.</p>
+                                <p className="text-sm text-white/40">Python telemetry server for device management, alerts, and live dashboards.</p>
                                 <div className="mt-4 flex items-center gap-2 text-[10px] font-bold text-[#ff00e5] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
                                     Get Source <ChevronRight className="size-3" />
                                 </div>
                             </a>
+                        </div>
+
+                        {/* What's New in v1.1.0 */}
+                        <div className="p-6 rounded-2xl bg-gradient-to-r from-[var(--il-lime)]/10 via-cyan-500/5 to-transparent border border-[var(--il-lime)]/20 mb-20">
+                            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[var(--il-lime)] mb-3">
+                                <Zap className="size-4" /> What's New in v1.1.0
+                            </div>
+                            <div className="grid sm:grid-cols-2 gap-3 text-xs text-white/60 leading-relaxed">
+                                <div>• <strong className="text-white">100% Non-Blocking Core:</strong> Smart Lock, WiFi state machine, NTP sync, and Buzzer melodic alerts run with zero <code className="text-cyan-400">delay()</code> calls.</div>
+                                <div>• <strong className="text-white">Multi-Arch Verified:</strong> Compiles cleanly on ESP32 (Core 2.x & 3.x), ESP8266, and Arduino AVR (Uno/Nano/Mega) with ArduinoJson v7 support.</div>
+                                <div>• <strong className="text-white">Smart Driver Caching:</strong> Cached DHT, DS18B20, BME280, and I2C LCD row buffers eliminate bus flicker and heap churn.</div>
+                                <div>• <strong className="text-white">New Modules & APIs:</strong> Added MPU6050 IMU fall/impact detection, SIM800L GSM/SMS, RAM-safe opt-in Camera server, and single-buffer <code className="text-cyan-400">httpPostFile()</code>.</div>
+                            </div>
                         </div>
 
                         {/* Content Sections */}
@@ -336,6 +349,11 @@ export default function DocumentationPage() {
                                                     <td className="py-4 px-2"><code className="text-yellow-500 text-[10px]">INTEGRALL_ENABLE_SENSORS</code></td>
                                                     <td className="py-4 px-2">Environment monitoring (Temp/Hum).</td>
                                                 </tr>
+                                                <tr>
+                                                    <td className="py-4 px-2 text-white font-bold italic">Adafruit MPU6050</td>
+                                                    <td className="py-4 px-2"><code className="text-yellow-500 text-[10px]">INTEGRALL_ENABLE_IMU</code></td>
+                                                    <td className="py-4 px-2">6-axis accelerometer/gyroscope for fall, impact & posture detection.</td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -468,25 +486,25 @@ export default function DocumentationPage() {
                                         <div className="group">
                                             <h3 className="text-white uppercase tracking-widest text-sm font-black mb-4 flex items-center gap-2">
                                                 <div className="size-2 rounded-full bg-[#00f2ff]" />
-                                                begin(address, cols, rows)
+                                                enableLCD(address, cols, rows)
                                             </h3>
-                                            <p className="mb-4">Initializes the I2C hardware and starts the display.</p>
+                                            <p className="mb-4">Initializes or re-configures the I2C LCD hardware (supports 16x2, 20x4, and custom addresses).</p>
                                             <ul className="list-disc pl-5 space-y-2 text-sm">
                                                 <li><code className="text-cyan-400">address</code>: I2C address (Default: 0x27)</li>
                                                 <li><code className="text-cyan-400">cols/rows</code>: Screen dimensions (Default: 16x2)</li>
-                                                <li>Auto-executes <code className="text-white/40">Wire.begin()</code> if the bus is inactive.</li>
+                                                <li>Auto-executes <code className="text-white/40">Wire.begin()</code> and caches row content to prevent I2C bus flicker.</li>
                                             </ul>
-                                            <CodeBlock language="cpp" code={`integrall.begin(); // Uses 0x27, 16x2 by default`} />
+                                            <CodeBlock language="cpp" code={`integrall.begin(); // Auto-initializes 0x27, 16x2\nintegrall.enableLCD(0x3F, 20, 4); // Optional custom geometry`} />
                                         </div>
 
                                         <div className="group">
                                             <h3 className="text-white uppercase tracking-widest text-sm font-black mb-4 flex items-center gap-2">
                                                 <div className="size-2 rounded-full bg-[#00f2ff]" />
-                                                print(text, col, row)
+                                                lcdPrint(text, col, row)
                                             </h3>
-                                            <p className="mb-4">The "Brain" of the LCD. It analyzes the input text length relative to screen columns.</p>
+                                            <p className="mb-4">The "Brain" of the LCD. It analyzes the input text length relative to screen columns and only writes to I2C when text changes.</p>
                                             <ul className="list-disc pl-5 space-y-2 text-sm">
-                                                <li>If the text fits: It clears the row and prints statically.</li>
+                                                <li>If the text fits: It pads the row cleanly and prints statically without flickering.</li>
                                                 <li>If text is long: It registers the row for <strong className="text-white">Background Scrolling</strong>.</li>
                                             </ul>
                                             <CodeBlock language="cpp" code={`integrall.lcdPrint("Short", 0, 0);\nintegrall.lcdPrint("This is a very long string that will scroll", 0, 1);`} />
@@ -495,7 +513,7 @@ export default function DocumentationPage() {
                                         <div className="group">
                                             <h3 className="text-white uppercase tracking-widest text-sm font-black mb-4 flex items-center gap-2">
                                                 <div className="size-2 rounded-full bg-[#00f2ff]" />
-                                                handle(speed_ms)
+                                                handle()
                                             </h3>
                                             <p className="mb-4 text-[#ff00e5] font-bold">MANDATORY FUNCTION.</p>
                                             <p className="mb-4">Processes the animation frames for all scrolling rows. Must be placed in your main <code className="text-white">loop()</code>.</p>
@@ -505,7 +523,7 @@ export default function DocumentationPage() {
                                         <div className="group">
                                             <h3 className="text-white uppercase tracking-widest text-sm font-black mb-4 flex items-center gap-2">
                                                 <div className="size-2 rounded-full bg-[#00f2ff]" />
-                                                scrollText(text, row, speed_ms)
+                                                lcdScrollText(text, row, speed_ms)
                                             </h3>
                                             <p className="mb-4">Force a professional, non-blocking scroll on a specific row, regardless of text length.</p>
                                             <CodeBlock language="cpp" code={`integrall.lcdScrollText("DANGER: SYSTEM OVERHEAT", 0, 100);`} />
@@ -513,12 +531,12 @@ export default function DocumentationPage() {
 
                                         <div className="grid sm:grid-cols-2 gap-8">
                                             <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-                                                <h4 className="text-white text-xs font-bold uppercase tracking-widest mb-4">setCursorVisible</h4>
+                                                <h4 className="text-white text-xs font-bold uppercase tracking-widest mb-4">lcdCursor</h4>
                                                 <p className="text-xs mb-4 text-white/40">Toggle the hardware cursor and blinking state.</p>
                                                 <CodeBlock language="cpp" code={`integrall.lcdCursor(true, true);`} />
                                             </div>
                                             <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-                                                <h4 className="text-white text-xs font-bold uppercase tracking-widest mb-4">setBacklight</h4>
+                                                <h4 className="text-white text-xs font-bold uppercase tracking-widest mb-4">lcdBacklight</h4>
                                                 <p className="text-xs mb-4 text-white/40">Power management for the display LEDs.</p>
                                                 <CodeBlock language="cpp" code={`integrall.lcdBacklight(false); // eco-mode`} />
                                             </div>
@@ -527,19 +545,19 @@ export default function DocumentationPage() {
                                         <div className="group">
                                             <h3 className="text-white uppercase tracking-widest text-sm font-black mb-4 flex items-center gap-2">
                                                 <div className="size-2 rounded-full bg-[#00f2ff]" />
-                                                createCustomChar(slot, charMap)
+                                                lcdCreateChar(slot, charMap)
                                             </h3>
                                             <p className="mb-4">Allows defining up to 8 custom 5x8 pixel characters (binary arrays).</p>
-                                            <CodeBlock language="cpp" code={`byte heart[8] = {0x0,0xa,0x1f,0x1f,0xe,0x4,0x0};\nintegrall.lcdCreateChar(0, heart);`} />
+                                            <CodeBlock language="cpp" code={`byte heart[8] = {0x0,0xa,0x1f,0x1f,0xe,0x4,0x0,0x0};\nintegrall.lcdCreateChar(0, heart);`} />
                                         </div>
 
                                         <div className="group">
                                             <h3 className="text-white uppercase tracking-widest text-sm font-black mb-4 flex items-center gap-2">
                                                 <div className="size-2 rounded-full bg-[#00f2ff]" />
-                                                getRaw()
+                                                lcdClear()
                                             </h3>
-                                            <p className="mb-4">Returns a pointer to the underlying <code className="text-white">LiquidCrystal_I2C</code> object for power users.</p>
-                                            <CodeBlock language="cpp" code={`integrall.getLCD()->getRaw()->command(LCD_RETURNHOME);`} />
+                                            <p className="mb-4">Clears the display and resets all active scroll buffers.</p>
+                                            <CodeBlock language="cpp" code={`integrall.lcdClear();`} />
                                         </div>
                                     </div>
 
@@ -728,10 +746,28 @@ export default function DocumentationPage() {
                                         <div className="group">
                                             <h3 className="text-white uppercase tracking-widest text-sm font-black mb-4 flex items-center gap-2">
                                                 <div className="size-2 rounded-full bg-[#D4FF33]" />
-                                                readGasLevel (MQ)
+                                                readGasLevel / Analog Percent (MQ)
                                             </h3>
-                                            <p className="mb-4">Reads MQ-series gas sensors (Smoke, CO, LPG). Returns a normalized parts-per-million (PPM) approximation or raw analog percentage.</p>
-                                            <CodeBlock language="cpp" code={`int gas = integrall.readAnalogPercent(A2); // MQ-2 on A2\nif (gas > 40) integrall.buzzer.alert();`} />
+                                            <p className="mb-4">Reads MQ-series gas sensors (Smoke, CO, LPG) with automatic 12-bit/10-bit ADC scaling and bounds clamping (0-100%).</p>
+                                            <CodeBlock language="cpp" code={`int gas = integrall.readAnalogPercent(A2); // MQ-2 on A2\nif (gas > 40) integrall.buzzerAlert();`} />
+                                        </div>
+
+                                        <div className="group">
+                                            <h3 className="text-white uppercase tracking-widest text-sm font-black mb-4 flex items-center gap-2">
+                                                <div className="size-2 rounded-full bg-[#D4FF33]" />
+                                                Scientific Psychrometrics (Dew Point, Heat Index, Altitude)
+                                            </h3>
+                                            <p className="mb-4">Built-in Magnus-Tetens dew point, NOAA Rothfusz heat index, and barometric altitude equations.</p>
+                                            <CodeBlock language="cpp" code={`float dp = integrall.calculateDewPoint(temp, hum);\nfloat hi = integrall.calculateHeatIndex(temp, hum);\nfloat alt = integrall.calculateAltitude(pressure_hPa);`} />
+                                        </div>
+
+                                        <div className="group">
+                                            <h3 className="text-white uppercase tracking-widest text-sm font-black mb-4 flex items-center gap-2">
+                                                <div className="size-2 rounded-full bg-[#D4FF33]" />
+                                                6-Axis IMU (MPU6050) — Impact & Posture
+                                            </h3>
+                                            <p className="mb-4">Enable <code className="text-white">INTEGRALL_ENABLE_IMU</code> for real-time g-force impact measurement, horizontal orientation checks, and human posture classification (<code className="text-cyan-400">"Standing/Sitting"</code>, <code className="text-cyan-400">"Lying Down"</code>, <code className="text-cyan-400">"Inverted"</code>, <code className="text-cyan-400">"Tilted"</code>).</p>
+                                            <CodeBlock language="cpp" code={`integrall.enableIMU(21, 22); // SDA, SCL\nfloat gForce = integrall.getImpactForce();\nString posture = integrall.getPosture();\nif (gForce > 2.8 && integrall.isHorizontal()) {\n  integrall.println("Fall detected!");\n}`} />
                                         </div>
 
                                         <div className="group">
@@ -771,8 +807,8 @@ export default function DocumentationPage() {
                                             <div className="size-2 rounded-full bg-red-500" />
                                             1. Initialization & Setup
                                         </h3>
-                                        <p>Initialize the module in your <code className="text-white">setup()</code> and add your relay pins. Most hobbyist relay modules are <strong className="text-white">Active Low</strong> (on when pin is 0), which Integrall handles by default.</p>
-                                        <CodeBlock language="cpp" code={`integrall.relay.begin(4); // Max 4 relays\nintegrall.relay.addRelay(0, 5, true, "Main Pump"); // Index 0, GPIO 5, Active Low`} />
+                                        <p>Register your relay pins in <code className="text-white">setup()</code> using <code className="text-white">enableRelay()</code>. Most hobbyist relay modules are <strong className="text-white">Active Low</strong> (on when pin is 0), which Integrall handles by default.</p>
+                                        <CodeBlock language="cpp" code={`int pump = integrall.enableRelay(5, true, "Main Pump"); // GPIO 5, Active Low`} />
                                     </div>
 
                                     {/* Basic Control */}
@@ -783,19 +819,19 @@ export default function DocumentationPage() {
                                         </h3>
                                         <div className="grid md:grid-cols-2 gap-4 not-prose">
                                             <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5">
-                                                <code className="text-[#D4FF33] text-xs">on(index) / off(index)</code>
+                                                <code className="text-[#D4FF33] text-xs">relayOn(idx) / relayOff(idx)</code>
                                                 <p className="text-[11px] mt-2 text-white/40">Directly switch the relay state.</p>
                                             </div>
                                             <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5">
-                                                <code className="text-[#D4FF33] text-xs">toggle(index)</code>
+                                                <code className="text-[#D4FF33] text-xs">relayToggle(idx)</code>
                                                 <p className="text-[11px] mt-2 text-white/40">Flip the current state of the relay.</p>
                                             </div>
                                             <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5">
-                                                <code className="text-[#D4FF33] text-xs">allOff() / allOn()</code>
+                                                <code className="text-[#D4FF33] text-xs">allRelaysOff() / allRelaysOn()</code>
                                                 <p className="text-[11px] mt-2 text-white/40">Bulk control for emergency stop or power-up.</p>
                                             </div>
                                             <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5">
-                                                <code className="text-[#D4FF33] text-xs">isOn(index)</code>
+                                                <code className="text-[#D4FF33] text-xs">relayIsOn(idx)</code>
                                                 <p className="text-[11px] mt-2 text-white/40">Returns true if the relay is currently active.</p>
                                             </div>
                                         </div>
@@ -811,13 +847,13 @@ export default function DocumentationPage() {
                                         <div className="space-y-4">
                                             <h4 className="text-white font-bold text-sm">Safety Timeouts (Auto-Off)</h4>
                                             <p className="text-sm">Prevent hardware damage by setting a maximum "ON" duration. Integrall automatically turns the relay off once the timer expires.</p>
-                                            <CodeBlock language="cpp" code={`// Turn off Relay #0 automatically after 10 seconds of activity\nintegrall.relay.setSafetyTimeout(0, 10000);`} />
+                                            <CodeBlock language="cpp" code={`// Turn off Relay #0 automatically after 10 seconds of activity\nintegrall.relaySetTimeout(pump, 10000);`} />
                                         </div>
 
                                         <div className="space-y-4">
                                             <h4 className="text-white font-bold text-sm">Safety Interlocks</h4>
                                             <p className="text-sm">Crucial for motor H-bridges or 2-way valves. Grouping relays prevents them from being active simultaneously. Turning one ON will automatically turn others in the group OFF.</p>
-                                            <CodeBlock language="cpp" code={`integrall.relay.setInterlockGroup(0, 1); // "Forward" in Group 1\nintegrall.relay.setInterlockGroup(1, 1); // "Reverse" in Group 1`} />
+                                            <CodeBlock language="cpp" code={`integrall.relaySetInterlock(0, 1); // "Forward" in Group 1\nintegrall.relaySetInterlock(1, 1); // "Reverse" in Group 1`} />
                                         </div>
                                     </div>
 
@@ -828,17 +864,7 @@ export default function DocumentationPage() {
                                             4. Manual Physical Triggers
                                         </h3>
                                         <p className="text-sm">Connect physical buttons directly to relays. Integrall handles the <strong className="text-white">software debouncing</strong> and toggle intervals in the background.</p>
-                                        <CodeBlock language="cpp" code={`// Use GPIO 12 as a physical button to toggle Relay #0\nintegrall.relay.attachTrigger(0, 12, true); // true = Active Low button`} />
-                                    </div>
-
-                                    {/* Stats */}
-                                    <div className="space-y-6">
-                                        <h3 className="text-white uppercase tracking-widest text-sm font-black flex items-center gap-2">
-                                            <div className="size-2 rounded-full bg-red-500" />
-                                            5. Statistics & Health Monitoring
-                                        </h3>
-                                        <p className="text-sm">Monitor lifespan and power usage by tracking toggle counts and total active time.</p>
-                                        <CodeBlock language="cpp" code={`uint32_t activeMillis = integrall.relay.getTotalOnTime(0);\nuint8_t clicks = integrall.relay.getToggleCount(0);`} />
+                                        <CodeBlock language="cpp" code={`// Use GPIO 12 as a physical button to toggle Relay #0\nintegrall.relayAttachButton(pump, 12, true); // true = Active Low button`} />
                                     </div>
 
                                     {/* Mandatory Handle */}
@@ -869,8 +895,8 @@ export default function DocumentationPage() {
                                                 <div className="size-2 rounded-full bg-cyan-500" />
                                                 1. Setup & Keymaps
                                             </h3>
-                                            <p className="text-sm">Define your row and column pins. Standard 4x4 (1-9, A-D, *, #) and 4x3 (1-9, *, #) layouts are built-in.</p>
-                                            <CodeBlock language="cpp" code={`uint8_t rows[] = {13, 12, 14, 27};\nuint8_t cols[] = {26, 25, 33, 32};\n\nintegrall.keypad.begin(rows, cols, 4, 4); // Initialize 4x4`} />
+                                            <p className="text-sm">Define your row and column pins. Standard 4x4 (1-9, A-D, *, #) and 4x3 (1-9, *, #) layouts are built-in, and pin arrays are safely copied internally.</p>
+                                            <CodeBlock language="cpp" code={`uint8_t rows[] = {13, 12, 14, 27};\nuint8_t cols[] = {26, 25, 33, 32};\n\nintegrall.enableKeypad(rows, cols, 4, 4); // Initialize 4x4`} />
                                         </div>
 
                                         <div className="group">
@@ -878,8 +904,8 @@ export default function DocumentationPage() {
                                                 <div className="size-2 rounded-full bg-cyan-500" />
                                                 2. Secure PIN Entry (Buffer Mode)
                                             </h3>
-                                            <p className="text-sm">Use <code className="text-white">captureString()</code> in your loop. It automatically manages a character buffer, supports <code className="text-white">*</code> for backspace, and <code className="text-white">#</code> for submission.</p>
-                                            <CodeBlock language="cpp" code={`void loop() {\n  const char* input = integrall.keypad.captureString();\n  \n  if (integrall.keypad.isSubmitted()) {\n    if (integrall.keypad.checkPin("1234")) {\n       integrall.lcd.print("ACCESS GRANTED", 0, 1);\n    }\n    integrall.keypad.clearBuffer();\n  }\n}`} />
+                                            <p className="text-sm">Use <code className="text-white">keypadCapture()</code> in your loop. It automatically manages a character buffer, supports <code className="text-white">*</code> for backspace, and <code className="text-white">#</code> for submission.</p>
+                                            <CodeBlock language="cpp" code={`void loop() {\n  const char* input = integrall.keypadCapture();\n  \n  if (integrall.keypadSubmitted()) {\n    if (integrall.keypadCheckPin("1234")) {\n       integrall.lcdPrint("ACCESS GRANTED", 0, 1);\n    }\n    integrall.keypadClear();\n  }\n}`} />
                                         </div>
 
                                         <div className="group">
@@ -887,8 +913,8 @@ export default function DocumentationPage() {
                                                 <div className="size-2 rounded-full bg-cyan-500" />
                                                 3. Single Key Capture
                                             </h3>
-                                            <p className="text-sm">For simple navigation or menu selection, use <code className="text-white">getKey()</code> to receive character inputs as they happen.</p>
-                                            <CodeBlock language="cpp" code={`char key = integrall.keypad.getKey();\nif (key == 'A') menuUp();\nif (key == 'B') menuDown();`} />
+                                            <p className="text-sm">For simple navigation or menu selection, use <code className="text-white">keypadGetKey()</code> (or <code className="text-white">keypadLastKey()</code> when combining with buffer capture).</p>
+                                            <CodeBlock language="cpp" code={`char key = integrall.keypadGetKey();\nif (key == 'A') menuUp();\nif (key == 'B') menuDown();`} />
                                         </div>
                                     </div>
                                 </div>
@@ -903,35 +929,35 @@ export default function DocumentationPage() {
                                 </h2>
                                 <div className="prose prose-invert prose-cyan max-w-none text-white/60 space-y-12">
                                     <p className="text-lg leading-relaxed">
-                                        The <code className="text-[#D4FF33]">OLEDModule</code> provides high-level abstractions for the SSD1306 I2C display. It features smart text positioning, numeric label formatting, and real-time visual progress components.
+                                        The <code className="text-[#D4FF33]">OLEDModule</code> provides high-level abstractions for the SSD1306 I2C display. It features opaque text rendering (preventing character overlap artifacts), numeric label formatting, and real-time visual progress components.
                                     </p>
 
                                     <div className="space-y-8">
                                         <div className="group">
                                             <h3 className="text-white uppercase tracking-widest text-sm font-black mb-4 flex items-center gap-2">
                                                 <div className="size-2 rounded-full bg-magenta-500" />
-                                                Visual Components: drawBar()
+                                                Visual Components: oledBar()
                                             </h3>
                                             <p className="text-sm">Render hardware-accelerated progress bars for displaying sensor ranges or process steps.</p>
-                                            <CodeBlock language="cpp" code={`integrall.oled.drawBar(75, 56); // Percent: 75, Y-Pixel: 56`} />
+                                            <CodeBlock language="cpp" code={`integrall.oledBar(75, 56); // Percent: 75, Y-Pixel: 56`} />
                                         </div>
 
                                         <div className="group">
                                             <h3 className="text-white uppercase tracking-widest text-sm font-black mb-4 flex items-center gap-2">
                                                 <div className="size-2 rounded-full bg-magenta-500" />
-                                                Formatted Telemetry: printValue()
+                                                Formatted Telemetry: oledPrintValue()
                                             </h3>
                                             <p className="text-sm">Print a label followed by a formatted float value automatically. Perfect for monitoring.</p>
-                                            <CodeBlock language="cpp" code={`integrall.oled.printValue("TEMP: ", 24.5, 0); // Label, value, row`} />
+                                            <CodeBlock language="cpp" code={`integrall.oledPrintValue("TEMP: ", 24.5, 0); // Label, value, row`} />
                                         </div>
 
                                         <div className="group">
                                             <h3 className="text-white uppercase tracking-widest text-sm font-black mb-4 flex items-center gap-2">
                                                 <div className="size-2 rounded-full bg-magenta-500" />
-                                                Direct GFX Access
+                                                Direct GFX Access: oled()
                                             </h3>
                                             <p className="text-sm">Access the underlying <code className="text-white">Adafruit_SSD1306</code> instance for drawing lines, circles, or custom bitmaps.</p>
-                                            <CodeBlock language="cpp" code={`integrall.oled.getRaw()->drawCircle(64, 32, 10, WHITE);`} />
+                                            <CodeBlock language="cpp" code={`integrall.oled()->drawCircle(64, 32, 10, SSD1306_WHITE);\nintegrall.oled()->display();`} />
                                         </div>
                                     </div>
                                 </div>
@@ -948,7 +974,7 @@ export default function DocumentationPage() {
                                 </h2>
                                 <div className="prose prose-invert prose-cyan max-w-none text-white/60 space-y-12">
                                     <p className="text-lg leading-relaxed">
-                                        The <code className="text-[#D4FF33]">BuzzerModule</code> replaces blocking <code className="text-white">delay()</code> tones with a non-blocking state machine. Generate patterns, melodic success sequences, and custom frequencies while keeping your device responsive.
+                                        The <code className="text-[#D4FF33]">BuzzerModule</code> replaces blocking <code className="text-white">delay()</code> tones with a non-blocking state machine. Generate patterns, melodic two-tone success sequences, and custom frequencies while keeping your device responsive.
                                     </p>
 
                                     <div className="space-y-8">
@@ -957,8 +983,8 @@ export default function DocumentationPage() {
                                                 <div className="size-2 rounded-full bg-white" />
                                                 Standard Alerts (Presets)
                                             </h3>
-                                            <p className="text-sm">Use optimized presets for common UI feedback. The <code className="text-white">success()</code> preset features a melodic frequency jump.</p>
-                                            <CodeBlock language="cpp" code={`integrall.buzzer.success(); // High pitched melodic tone\nintegrall.buzzer.alert();   // Rapid 3-beep alarm\nintegrall.buzzer.failure(); // Low heavy tone\nintegrall.buzzer.beep(50);  // Short UI click click`} />
+                                            <p className="text-sm">Initialize with <code className="text-white">enableBuzzer(pin)</code> and trigger non-blocking feedback presets. The <code className="text-white">buzzerSuccess()</code> preset plays a rising 1800Hz → 2500Hz melodic tone.</p>
+                                            <CodeBlock language="cpp" code={`integrall.enableBuzzer(25);\nintegrall.buzzerSuccess(); // High pitched rising melodic tone\nintegrall.buzzerAlert();   // Rapid 3-beep alarm\nintegrall.buzzerFail();    // Low heavy tone\nintegrall.buzzerBeep(50);  // Short UI click`} />
                                         </div>
 
                                         <div className="group">
@@ -967,7 +993,7 @@ export default function DocumentationPage() {
                                                 Non-Blocking Patterns
                                             </h3>
                                             <p className="text-sm">Design complex beep-gap patterns. The logic runs in the background using the <code className="text-white">handle()</code> method.</p>
-                                            <CodeBlock language="cpp" code={`// Beep 5 times, 200ms ON, 200ms OFF, at 1.5kHz frequency\nintegrall.buzzer.pattern(5, 200, 200, 1500);`} />
+                                            <CodeBlock language="cpp" code={`// Beep 5 times, 200ms ON, 200ms OFF\nintegrall.buzzerPattern(5, 200, 200);`} />
                                         </div>
                                     </div>
 
@@ -1034,7 +1060,7 @@ export default function DocumentationPage() {
                                                 1. Setup & Polarity
                                             </h3>
                                             <p className="text-sm">Initialize with R, G, B pins. Set the last parameter to <code className="text-white">true</code> if using Common Anode LEDs.</p>
-                                            <CodeBlock language="cpp" code={`integrall.rgb.begin(14, 12, 13, false); // R, G, B, isCommonAnode`} />
+                                            <CodeBlock language="cpp" code={`integrall.enableRGB(14, 12, 13, false); // R, G, B, isCommonAnode`} />
                                         </div>
 
                                         <div className="group">
@@ -1043,7 +1069,7 @@ export default function DocumentationPage() {
                                                 2. Color Named Presets
                                             </h3>
                                             <p className="text-sm">Don't remember hex codes? Use built-in string names for industrial signaling.</p>
-                                            <CodeBlock language="cpp" code={`integrall.rgb.setColor("orange"); // Presets: red, green, blue, yellow, cyan, white, orange, purple`} />
+                                            <CodeBlock language="cpp" code={`integrall.setColor("orange"); // Presets: red, green, blue, yellow, cyan, white, orange, purple`} />
                                         </div>
 
                                         <div className="group">
@@ -1052,7 +1078,7 @@ export default function DocumentationPage() {
                                                 3. Direct Control & Blinking
                                             </h3>
                                             <p className="text-sm">Use raw PWM values (0-255) or the non-blocking blinker for status heartbeats.</p>
-                                            <CodeBlock language="cpp" code={`integrall.rgb.set(255, 128, 0); // Custom Amber\nintegrall.rgb.updateBlink(0, 255, 0, 1000); // Blink Green ever 1s (Non-blocking)`} />
+                                            <CodeBlock language="cpp" code={`integrall.setRGB(255, 128, 0); // Custom Amber\nintegrall.rgbBlink(0, 255, 0, 1000); // Blink Green every 1s (Non-blocking)`} />
                                         </div>
                                     </div>
                                 </div>
@@ -1072,7 +1098,7 @@ export default function DocumentationPage() {
 
                                     <div className="space-y-4">
                                         <h4 className="text-white font-bold text-sm">Minimal Usage</h4>
-                                        <CodeBlock language="cpp" code={`// Flash an LED on GPIO 2 every 500ms\nintegrall.blinker.begin(2, 500);\n\n// In loop():\nintegrall.handle();`} />
+                                        <CodeBlock language="cpp" code={`// Flash an LED on GPIO 2 every 500ms\nintegrall.blink(2, 500);\n\n// In loop():\nintegrall.handle();\n\n// Stop blinking and set pin LOW:\nintegrall.stopBlink();`} />
                                     </div>
 
                                     <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
@@ -1080,7 +1106,7 @@ export default function DocumentationPage() {
                                         <ul className="list-disc pl-5 space-y-2 text-[11px] leading-relaxed">
                                             <li>Prevent loop hanging during hardware status signalling.</li>
                                             <li>Manage heartbeats for multiple sensors simultaneously.</li>
-                                            <li>Automatically clean up GPIO states when stopped via <code className="text-white">stop()</code>.</li>
+                                            <li>Automatically clean up GPIO states when stopped via <code className="text-white">stopBlink()</code>.</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -1095,22 +1121,22 @@ export default function DocumentationPage() {
                                 </h2>
                                 <div className="prose prose-invert prose-cyan max-w-none text-white/60 space-y-12">
                                     <p className="text-lg leading-relaxed">
-                                        The <code className="text-[#D4FF33]">CameraModule</code> turns any AI-Thinker or Wrover board into a headless MJPEG server in seconds. It handles board-specific pin mapping (Vsync, PWDN, Reset) and JPEG buffer optimization in PSRAM automatically.
+                                        The <code className="text-[#D4FF33]">CameraModule</code> turns any AI-Thinker or Wrover board into a headless MJPEG server or snapshot uploader in seconds. It handles board-specific pin mapping (Vsync, PWDN, Reset) and JPEG buffer optimization in PSRAM automatically.
                                     </p>
 
                                     <div className="space-y-4">
-                                        <h4 className="text-white font-bold text-sm">Activation Flow</h4>
-                                        <CodeBlock language="cpp" code={`#define INTEGRALL_ENABLE_CAMERA\n#include <Integrall.h>\n\nvoid setup() {\n  integrall.begin();\n  integrall.camera.begin(); // Starts hardware & MJPEG server\n}`} />
+                                        <h4 className="text-white font-bold text-sm">Activation & Snapshot Flow</h4>
+                                        <CodeBlock language="cpp" code={`#define INTEGRALL_ENABLE_WIFI\n#define INTEGRALL_ENABLE_CAMERA\n#include <Integrall.h>\n\nIntegrall::System integrall;\n\nvoid setup() {\n  integrall.begin("MyWiFi", "Pass123", "http://my-backend.com");\n  if (integrall.enableCamera()) {\n    integrall.startCameraServer(); // Opt-in MJPEG server (:81/stream)\n    integrall.println(integrall.getCameraStreamURL());\n  }\n}`} />
                                     </div>
 
                                     <div className="grid md:grid-cols-2 gap-6 not-prose mt-8">
                                         <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-                                            <h5 className="text-white font-bold text-xs uppercase mb-2">VGA Baseline</h5>
-                                            <p className="text-[11px] leading-relaxed">Optimized for speed (640x480). Auto-detects if PSRAM is available to increase JPEG quality.</p>
+                                            <h5 className="text-white font-bold text-xs uppercase mb-2">RAM-Safe Defaults</h5>
+                                            <p className="text-[11px] leading-relaxed">Defaults to QVGA (320x240) to preserve internal heap for TLS/HTTP uploads, with PSRAM auto-detection for double-buffering.</p>
                                         </div>
                                         <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-                                            <h5 className="text-white font-bold text-xs uppercase mb-2">MJPEG Server</h5>
-                                            <p className="text-[11px] leading-relaxed">Automatically starts a streaming server on Port 80 if WiFi is connected during initialization.</p>
+                                            <h5 className="text-white font-bold text-xs uppercase mb-2">Opt-In MJPEG Server</h5>
+                                            <p className="text-[11px] leading-relaxed">Call <code className="text-cyan-400">startCameraServer()</code> to launch the control UI on Port 80 and MJPEG live stream on Port 81 (<code className="text-cyan-400">/stream</code>).</p>
                                         </div>
                                     </div>
                                 </div>
@@ -1175,13 +1201,13 @@ export default function DocumentationPage() {
                                 <div className="absolute left-0 top-0 w-12 h-px bg-cyan-500/50" />
                                 <h2 className="text-3xl font-black uppercase tracking-tighter mb-8 flex items-center gap-4">
                                     <span className="text-white/10 shrink-0">19</span>
-                                    Wireless & Comms (BLE / LoRa)
+                                    Wireless & Cellular (BLE / LoRa / GSM)
                                 </h2>
                                 <div className="prose prose-invert prose-cyan max-w-none text-white/60 space-y-12">
                                     <p className="text-lg leading-relaxed">
-                                        Go beyond WiFi. Integrall provides simplified wrappers for <strong className="text-white">Bluetooth Low Energy (BLE)</strong> advertising and long-range <strong className="text-white">LoRa Radio</strong> communication.
+                                        Go beyond WiFi. Integrall provides simplified wrappers for <strong className="text-white">Bluetooth Low Energy (BLE)</strong> advertising, long-range <strong className="text-white">LoRa Radio</strong> communication, and <strong className="text-white">SIM800L GSM/GPRS</strong> cellular SMS & voice calls.
                                     </p>
-                                    <CodeBlock language="cpp" code={`// Bluetooth Start\nintegrall.commBeginBLE("Integrall-Node-01");\nintegrall.commUpdateBLE(relayState); // Send state to mobile apps\n\n// LoRa Transmission\nintegrall.commBeginLoRa(868E6); // 868MHz (EU)\nintegrall.commPushLoRa("SOS: Low Battery");`} />
+                                    <CodeBlock language="cpp" code={`// Bluetooth Start (INTEGRALL_ENABLE_COMM)\nintegrall.commBeginBLE("Integrall-Node-01");\nintegrall.commUpdateBLE(relayState); // Send state to mobile apps\n\n// LoRa Transmission (INTEGRALL_ENABLE_COMM)\nintegrall.commBeginLoRa(868E6); // 868MHz (EU)\nintegrall.commPushLoRa("SOS: Low Battery");\n\n// Cellular SMS & Voice (INTEGRALL_ENABLE_CELLULAR)\nintegrall.cellularBegin(Serial2, 16, 17); // Port, RX, TX\nintegrall.cellularSendSMS("+1234567890", "Alert: Fall detected!");\nintegrall.cellularCall("+1234567890");`} />
                                 </div>
                             </section>
 
@@ -1319,9 +1345,13 @@ export default function DocumentationPage() {
                                                     <CodeBlock language="cpp" code={`integrall.sendTelemetry("temp", 24.5);`} />
                                                 </div>
                                                 <div className="p-4 bg-white/[0.03] border border-white/5 rounded-xl">
-                                                    <div className="text-[10px] font-bold text-white/40 uppercase mb-2">Data Bundle (JSON)</div>
-                                                    <CodeBlock language="cpp" code={`StaticJsonDocument<128> doc;\ndoc["hum"] = 60;\ndoc["light"] = 80;\nintegrall.sendTelemetry(doc);`} />
+                                                    <div className="text-[10px] font-bold text-white/40 uppercase mb-2">Data Bundle (JSON v7)</div>
+                                                    <CodeBlock language="cpp" code={`JsonDocument doc;\ndoc["hum"] = 60;\ndoc["light"] = 80;\nintegrall.sendTelemetry(doc);`} />
                                                 </div>
+                                            </div>
+                                            <div className="p-4 bg-white/[0.03] border border-white/5 rounded-xl">
+                                                <div className="text-[10px] font-bold text-white/40 uppercase mb-2">Multipart Binary Upload (Camera / Audio / Logs)</div>
+                                                <CodeBlock language="cpp" code={`String resp = integrall.httpPostFile("http://my-server.com/upload", fb->buf, fb->len, "snap.jpg", "image/jpeg");`} />
                                             </div>
                                         </div>
 
@@ -1357,7 +1387,7 @@ export default function DocumentationPage() {
                                         </div>
                                     </div>
 
-                                    <CodeBlock language="cpp" code={`#define INTEGRALL_DEBUG_LEVEL 4 // Set to Verbose\n#include <Integrall.h>\n\nvoid setup() {\n  integrall.begin(115200); // Start serial at 115200 baud\n  integrall.logger.printMemoryStats(); // Print ESP32 Heap Status\n}`} />
+                                    <CodeBlock language="cpp" code={`#define INTEGRALL_DEBUG_LEVEL 4 // Set to Verbose\n#include <Integrall.h>\n\nIntegrall::System integrall;\n\nvoid setup() {\n  integrall.begin(115200); // Start serial at 115200 baud\n  integrall.printMemoryStats(); // Print ESP32 Heap & PSRAM Status\n}`} />
                                 </div>
                             </section>
 
@@ -1379,11 +1409,16 @@ export default function DocumentationPage() {
                                             <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_ENABLE_SERVO</span> <span className="text-cyan-400">OFF</span></div>
                                             <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_ENABLE_LCD</span> <span className="text-cyan-400">OFF</span></div>
                                             <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_ENABLE_OLED</span> <span className="text-cyan-400">OFF</span></div>
+                                            <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_ENABLE_SENSORS</span> <span className="text-cyan-400">OFF</span></div>
+                                            <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_ENABLE_IMU</span> <span className="text-cyan-400">OFF</span></div>
                                             <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_ENABLE_KEYPAD</span> <span className="text-cyan-400">OFF</span></div>
+                                            <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_ENABLE_BUZZER</span> <span className="text-cyan-400">OFF</span></div>
+                                            <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_ENABLE_RGB</span> <span className="text-cyan-400">OFF</span></div>
                                             <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_ENABLE_INPUT</span> <span className="text-cyan-400">OFF</span></div>
                                             <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_ENABLE_STORAGE</span> <span className="text-cyan-400">OFF</span></div>
                                             <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_ENABLE_TIME</span> <span className="text-cyan-400">OFF</span></div>
                                             <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_ENABLE_COMM</span> <span className="text-cyan-400">OFF</span></div>
+                                            <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_ENABLE_CELLULAR</span> <span className="text-cyan-400">OFF</span></div>
                                             <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_ENABLE_POWER</span> <span className="text-cyan-400">OFF</span></div>
                                             <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_ENABLE_AUDIO</span> <span className="text-cyan-400">OFF</span></div>
                                             <div className="flex justify-between border-b border-white/5 py-2"><span>INTEGRALL_ENABLE_STEPPER</span> <span className="text-cyan-400">OFF</span></div>
