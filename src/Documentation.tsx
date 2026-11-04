@@ -1139,22 +1139,26 @@ export default function DocumentationPage() {
                                 </h2>
                                 <div className="prose prose-invert prose-cyan max-w-none text-white/60 space-y-12">
                                     <p className="text-lg leading-relaxed">
-                                        The <code className="text-[#D4FF33]">CameraModule</code> turns any AI-Thinker or Wrover board into a headless MJPEG server or snapshot uploader in seconds. It handles board-specific pin mapping (Vsync, PWDN, Reset) and JPEG buffer optimization in PSRAM automatically.
+                                        The <code className="text-[#D4FF33]">CameraModule</code> supports <strong>19+ ESP32, ESP32-S2, and ESP32-S3 camera boards</strong> and automatically detects the attached ribbon sensor (<code className="text-cyan-400">OV2640</code>, <code className="text-cyan-400">OV3660</code>, <code className="text-cyan-400">OV5640</code>, <code className="text-cyan-400">GC2145</code>) to apply sensor-specific orientation (<code className="text-cyan-400">vflip</code>/<code className="text-cyan-400">hmirror</code>), PSRAM double-buffering, and color calibration out of the box.
                                     </p>
 
                                     <div className="space-y-4">
-                                        <h4 className="text-white font-bold text-sm">Activation & Snapshot Flow</h4>
-                                        <CodeBlock language="cpp" code={`#define INTEGRALL_ENABLE_WIFI\n#define INTEGRALL_ENABLE_CAMERA\n#include <Integrall.h>\n\nIntegrall::System integrall;\n\nvoid setup() {\n  integrall.begin("MyWiFi", "Pass123", "http://my-backend.com");\n  if (integrall.enableCamera()) {\n    integrall.startCameraServer(); // Opt-in MJPEG server (:81/stream)\n    integrall.println(integrall.getCameraStreamURL());\n  }\n}`} />
+                                        <h4 className="text-white font-bold text-sm">Multi-Board Activation, Tuning & Snapshot Flow</h4>
+                                        <CodeBlock language="cpp" code={`#define INTEGRALL_ENABLE_WIFI\n#define INTEGRALL_ENABLE_CAMERA\n#include <Integrall.h>\n\nIntegrall::System integrall;\n\nvoid setup() {\n  // Optional: Pre-select board before begin() (defaults to CAM_BOARD_AI_THINKER)\n  // Supported: CAM_BOARD_AI_THINKER, CAM_BOARD_XIAO_ESP32S3, CAM_BOARD_FREENOVE_S3,\n  // CAM_BOARD_WROVER_KIT, CAM_BOARD_ESP32S3_EYE, CAM_BOARD_M5STACK_WIDE, etc.\n  integrall.setCameraBoard(CAM_BOARD_XIAO_ESP32S3);\n\n  integrall.begin("MyWiFi", "Pass123", "http://my-backend.com");\n\n  // Initialize with board preset + resolution (FRAMESIZE_QVGA, FRAMESIZE_VGA, FRAMESIZE_SVGA, FRAMESIZE_UXGA)\n  if (integrall.enableCamera(CAM_BOARD_XIAO_ESP32S3, FRAMESIZE_VGA)) {\n    integrall.setCameraQuality(10);       // 4 (best quality) to 63 (fastest stream)\n    integrall.setCameraFlip(true, false); // Runtime vertical flip & horizontal mirror\n    integrall.setCameraBrightness(1);     // -2 to +2 brightness / contrast / saturation\n    integrall.setCameraFlash(64);         // 0-255 PWM Flash LED synced to board pinout\n\n    integrall.startCameraServer();        // Opt-in MJPEG server (:81/stream)\n    integrall.println(integrall.getCameraSensorName()); // e.g. "OV2640", "OV3660", "OV5640"\n    integrall.println(integrall.getCameraStreamURL());\n  }\n}`} />
                                     </div>
 
-                                    <div className="grid md:grid-cols-2 gap-6 not-prose mt-8">
+                                    <div className="grid md:grid-cols-3 gap-6 not-prose mt-8">
                                         <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-                                            <h5 className="text-white font-bold text-xs uppercase mb-2">RAM-Safe Defaults</h5>
-                                            <p className="text-[11px] leading-relaxed">Defaults to QVGA (320x240) to preserve internal heap for TLS/HTTP uploads, with PSRAM auto-detection for double-buffering.</p>
+                                            <h5 className="text-white font-bold text-xs uppercase mb-2">19+ Board Profiles</h5>
+                                            <p className="text-[11px] leading-relaxed">Select AI-Thinker, Seeed XIAO ESP32S3 Sense, Freenove S3/WROVER, ESP-EYE, M5Stack, LilyGO T-Camera/T-SimCam, DFRobot FireBeetle 2, or pass a custom <code className="text-cyan-400">CameraPins</code> struct at runtime.</p>
+                                        </div>
+                                        <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
+                                            <h5 className="text-white font-bold text-xs uppercase mb-2">Auto Sensor PID Tuning</h5>
+                                            <p className="text-[11px] leading-relaxed">Automatically detects <code className="text-cyan-400">OV2640</code>, <code className="text-cyan-400">OV3660</code>, and <code className="text-cyan-400">OV5640</code> ribbon sensors and applies required vertical flip and color saturation fixes after hardware init.</p>
                                         </div>
                                         <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
                                             <h5 className="text-white font-bold text-xs uppercase mb-2">Opt-In MJPEG Server</h5>
-                                            <p className="text-[11px] leading-relaxed">Call <code className="text-cyan-400">startCameraServer()</code> to launch the control UI on Port 80 and MJPEG live stream on Port 81 (<code className="text-cyan-400">/stream</code>).</p>
+                                            <p className="text-[11px] leading-relaxed">Call <code className="text-cyan-400">startCameraServer()</code> to launch the control UI on Port 80 and MJPEG live stream on Port 81 (<code className="text-cyan-400">/stream</code>) with dynamic Flash LED pin sync.</p>
                                         </div>
                                     </div>
                                 </div>
