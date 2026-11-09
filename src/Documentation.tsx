@@ -1344,22 +1344,35 @@ export default function DocumentationPage() {
                                         <div className="group">
                                             <h3 className="text-white uppercase tracking-widest text-sm font-black mb-4 flex items-center gap-2">
                                                 <div className="size-2 rounded-full bg-[#ff00e5]" />
-                                                1. Easy HTTP (Native API Calls)
+                                                1. HTTPS REST Client, C++ HTML Renderer & WebSockets
                                             </h3>
                                             <p className="mb-4">
-                                                Say goodbye to <code className="text-white">HTTPClient</code> loops, header management, and memory leaks. The <code className="text-magenta-400">Easy HTTP</code> engine handles connection allocation natively and returns parsed strings immediately.
+                                                Say goodbye to manual <code className="text-white">HTTPClient</code> / <code className="text-white">WiFiClientSecure</code> setup, raw HTML string concatenation, and broken WebSocket dependencies. Integrall ships with a complete <strong>HTTP/HTTPS REST Client</strong>, a <strong>C++ HTML Tag & Dashboard Renderer</strong>, a <strong>Local HTTP/REST Web Server</strong>, and a <strong>Zero-Dependency RFC 6455 WebSocket Server & Client</strong>.
                                             </p>
 
                                             <div className="grid md:grid-cols-2 gap-8 not-prose mb-6">
                                                 <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-                                                    <h4 className="text-white text-xs font-bold uppercase tracking-widest mb-4">httpGet(url)</h4>
-                                                    <p className="text-xs mb-4 text-white/40">Performs a GET request and returns the response body as a String.</p>
-                                                    <CodeBlock language="cpp" code={`String json = integrall.httpGet("http://api.scantool.com/status");`} />
+                                                    <h4 className="text-white text-xs font-bold uppercase tracking-widest mb-4">HTTPS & HTTP REST Client (GET / POST / PUT / PATCH / DELETE)</h4>
+                                                    <p className="text-xs mb-4 text-white/40">Auto-detects <code className="text-cyan-400">https://</code> TLS URLs, supports Bearer Auth & custom headers, and returns status codes & bodies.</p>
+                                                    <CodeBlock language="cpp" code={`integrall.setBearerToken("my-jwt-token");\nintegrall.setHttpHeader("X-Device", "Node-01");\n\nString body = integrall.httpGet("https://api.example.com/status");\nint postCode = integrall.httpPost("https://api.example.com/data", "{\\"temp\\":25.4}");\nint putCode  = integrall.httpPut("https://api.example.com/cfg", "{\\"mode\\":1}");\nint delCode  = integrall.httpDelete("https://api.example.com/item/42");`} />
                                                 </div>
                                                 <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
-                                                    <h4 className="text-white text-xs font-bold uppercase tracking-widest mb-4">httpPost(url, payload)</h4>
-                                                    <p className="text-xs mb-4 text-white/40">Sends JSON data to a server and returns the HTTP status code.</p>
-                                                    <CodeBlock language="cpp" code={`int code = integrall.httpPost("http://api.server.com/ack", "{\\"id\\": 1}");`} />
+                                                    <h4 className="text-white text-xs font-bold uppercase tracking-widest mb-4">C++ HTML Tag & Dashboard Renderer</h4>
+                                                    <p className="text-xs mb-4 text-white/40">Build responsive dark-mode IoT dashboards with semantic C++ tag builders and live UI controls.</p>
+                                                    <CodeBlock language="cpp" code={`String page = integrall.htmlPage("ESP32 Control Hub",\n  integrall.htmlTag("h1", "Live Telemetry") +\n  integrall.htmlMetric("Temperature", "25.4", " °C", "temp") +\n  integrall.htmlToggle("Main Relay", "r1", false, "/api/relay") +\n  integrall.htmlSlider("Target (°C)", "sp", 16, 32, 24, "/api/sp") +\n  integrall.htmlButton("Sync Now", "/api/sync", "cyan") +\n  integrall.htmlWsScript(81, "ws-log")\n);\nintegrall.servePage("/", page);`} />
+                                                </div>
+                                            </div>
+
+                                            <div className="grid md:grid-cols-2 gap-8 not-prose mb-6">
+                                                <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
+                                                    <h4 className="text-white text-xs font-bold uppercase tracking-widest mb-4">Local HTTP/REST Web Server (Port 80)</h4>
+                                                    <p className="text-xs mb-4 text-white/40">Register GET, POST, PUT, PATCH, and DELETE routes with query args, JSON body parsing, and automatic CORS.</p>
+                                                    <CodeBlock language="cpp" code={`integrall.webServerBegin(80);\nintegrall.onGet("/api/relay", []() {\n  int state = integrall.webArg("state").toInt();\n  integrall.setRelay(0, state == 1);\n  integrall.webSendJson("{\\"ok\\":true}");\n});\nintegrall.onPost("/api/config", []() {\n  String rawJson = integrall.webBody();\n  integrall.webSendJson("{\\"saved\\":true}");\n});`} />
+                                                </div>
+                                                <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
+                                                    <h4 className="text-white text-xs font-bold uppercase tracking-widest mb-4">RFC 6455 WebSockets (Server & Client)</h4>
+                                                    <p className="text-xs mb-4 text-white/40">Zero-dependency real-time WebSocket broadcasting and remote client connection.</p>
+                                                    <CodeBlock language="cpp" code={`// WebSocket Server (Port 81)\nintegrall.wsServerBegin(81);\nintegrall.onWsMessage([](const char* msg) {\n  integrall.println("WS Received: %s", msg);\n});\nintegrall.wsBroadcast("{\\"temp\\":25.4}"); // Updates #temp in browser!\n\n// Or connect as a WebSocket Client:\nintegrall.wsConnect("ws://192.168.1.50:8080/ws");\nintegrall.wsSend("{\\"hello\\":\\"server\\"}");`} />
                                                 </div>
                                             </div>
                                         </div>
